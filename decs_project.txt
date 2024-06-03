@@ -1,0 +1,91 @@
+webgis_project/
+│
+├── static/ (Thư mục chứa các tệp tĩnh như CSS, JavaScript)
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+│
+├── templates/ (Thư mục chứa các tệp template HTML)
+│   └── index.html (trang chủ giới thiệu)
+│   └── map.html
+│
+├── data/ (Thư mục chứa dữ liệu địa lý)
+│   └── shapefiles/
+│   │   └── Thuyhe_Diemven2/
+│   │   └── Thuyhe_HCM_motphan_DISSOLVE_Line5/
+│   │   └── Thuyhe_HCM_motphan_DISSOLVE/
+│   │   └── TPThuDuc/
+│
+│   └── csv/
+│   │   └── Thuyhe_Diemven2.csv (dùng để tạo file facility_points.csv)
+│   │   └── Thuyhe_HCM_motphan_test_graph.csv (dùng để tạo file network_distance.csv) 
+│   │   └── network_distance.csv
+│   │   └── facility_points.csv
+│
+│   └── geoserver/
+│   │   └── qgis (file lưu trữ bản vẽ qgis)
+│   │   └── style (các file định dạng màu cho map) 
+│
+├── scripts/ (Thư mục chứa các script Python để export csv)
+│   └── pCenter.py 
+│   └── LSCP.py 
+│   └── networkDistance.py 
+│   └── facilityPoints.py 
+│
+├── DB_Results/ 
+│   └── DB_Result_LSCP_Rescue_Station/ (Thư mục chứa các file kết quả tính theo thuật toán LSCP)
+│   │   └── ketqua_10LSCP_001135_31052024_1429.csv
+│
+│   └── DB_Result_PCenter_Rescue_Station/ (Thư mục chứa các file kết quả tính theo thuật toán PCenter)
+│   │   └── ketqua_10pCenter_000325_31052024_5212.csv
+│
+├── app.py (File chính của Flask)
+├── requirements.txt (Danh sách các gói Python cần thiết)
+├── README.md (Tài liệu hướng dẫn)
+└── desc_project (mô tả webgis)
+
+
+
+Thao tác chạy các file python theo thứ tự 1 đến 4
+	1. Khi run file networkDistance.py -> export network_distance.csv
+	2. Khi run file facilityPoints.py -> export facility_points.csv
+	3. Khi run file pCenter.py -> export ketqua_2pCenter_221901_28052024_2146.csv
+	4. Khi run file lSCP.py -> export ketqua_2LSCP_223515_28052024_5349.csv
+
+
+
+Giao diện map.html bao gồm:
+	1. 2 button zoom in/zoom out
+	2. 1 button Layers: khi click vào hiện ra 4 checkbox tương ứng 4 layers (Thuyhe_Diemven2, 
+			Thuyhe_HCM_motphan_DISSOLVE_Line5, Thuyhe_HCM_motphan_DISSOLVE, TPThuDuc)
+	3. 1 button "Tìm trạm cứu hộ": khi click vào sẽ hiện 
+		+ 1 pop-up nằm bên phải button, bao gồm: 
+				* 1 text: cho phép nhập id x và y -> chạy file networkDistance.py và facilityPoints.py
+				* 2 button: 
+					=> 'Tìm trạm bằng P-Center' -> chạy file pCenter.py 
+					=> 'Tìm trạm bằng LSCP' -> chạy file lSCP.py 
+		+ sau khi click 1 trong 2 button -> hiện nội dung A (nội dung trong file csv 'ketqua_...') nằm bên dưới text 
+	4. 1 button "Xem điểm trạm" nằm bên phải nội dung A -> khi click vào sẽ hiện ra các điểm trạm tìm được trên map
+
+
+
+Giao diện index.html bao gồm:
+    1. Giới thiệu webgis Trạm cứu hộ
+    2. Đơn vị sử dụng webgis: Trạm PCCC, Bộ Công An, Bộ GTVT, Trạm y tế và các ban ngành liên quan
+    3. Điều hướng đến map.html
+    4. Footer
+
+
+
+Link wms:
+	1. Thuỷ hệ điểm ven 2: http://localhost:8082/geoserver/rescuestation/wms?service=WMS&version=1.1.0&request=GetMap&layers=rescuestation%3Athuyhe_diemven2&bbox=612684.875%2C1189157.0%2C623581.5%2C1205491.125&width=512&height=768&srs=EPSG%3A3405&styles=&format=application/openlayers
+		Layers: rescuestation:thuyhe_diemven2
+	2. Thuỷ hệ 1 phần: http://localhost:8082/geoserver/rescuestation/wms?service=WMS&version=1.1.0&request=GetMap&layers=rescuestation%3Athuyhe_hcm_motphan_dissolve&bbox=576020.375%2C1145235.0%2C639632.4375%2C1234279.25&width=548&height=768&srs=EPSG%3A3405&styles=&format=application/openlayers
+		Layers: rescuestation:thuyhe_hcm_motphan_dissolve
+	3. Thuỷ hệ line 5: http://localhost:8082/geoserver/rescuestation/wms?service=WMS&version=1.1.0&request=GetMap&layers=rescuestation%3Athuyhe_hcm_motphan_dissolve_line5&bbox=612684.875%2C1189152.625%2C623581.75%2C1205492.125&width=512&height=768&srs=EPSG%3A3405&styles=&format=application/openlayers
+		Layers: rescuestation:thuyhe_hcm_motphan_dissolve_line5
+	4. Thành phố Thủ Đức: http://localhost:8082/geoserver/rescuestation/wms?service=WMS&version=1.1.0&request=GetMap&layers=rescuestation%3Atpthuduc&bbox=603437.5%2C1188070.25%2C623581.75%2C1205492.125&width=768&height=664&srs=EPSG%3A3405&styles=&format=application/openlayers
+		Layers: rescuestation:tpthuduc
+
+
