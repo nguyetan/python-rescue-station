@@ -8,19 +8,30 @@ from datetime import datetime
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-def main():
-    network_distance = pd.read_csv('C:/Users/ASUS/Downloads/rescue_station_project/data/csv/network_distance.csv')
-    facility_points = pd.read_csv('C:/Users/ASUS/Downloads/rescue_station_project/data/csv/facility_points.csv')
-    study_area = geopandas.read_file('C:/Users/ASUS/Downloads/rescue_station_project/data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5.shp').dissolve()
 
-    pivot_table = network_distance.pivot_table(values='Distance', index='EndPoint', columns='StartPoint', fill_value=0)
+def main():
+    network_distance = pd.read_csv(
+        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/network_distance.csv"
+    )
+    facility_points = pd.read_csv(
+        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/facility_points.csv"
+    )
+    study_area = geopandas.read_file(
+        "C:/Users/ASUS/Downloads/rescue_station_project/data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5_84.shp"
+    ).dissolve()
+
+    pivot_table = network_distance.pivot_table(
+        values="Distance", index="EndPoint", columns="StartPoint", fill_value=0
+    )
     cost_matrix = pivot_table.astype(int)
 
     p_facilities = int(input("Nhập số lượng facilities cần tìm: "))
     num_points = cost_matrix.shape[0]
     model = pulp.LpProblem("p-Center Problem", pulp.LpMinimize)
 
-    x = pulp.LpVariable.dicts("x", (range(num_points), range(num_points)), 0, 1, pulp.LpBinary)
+    x = pulp.LpVariable.dicts(
+        "x", (range(num_points), range(num_points)), 0, 1, pulp.LpBinary
+    )
     y = pulp.LpVariable.dicts("y", range(num_points), 0, 1, pulp.LpBinary)
     z = pulp.LpVariable("z", 0)
     model += z
@@ -45,12 +56,14 @@ def main():
     for j in range(num_points):
         if pulp.value(y[j]) == 1:
             facility_info = facility_points.iloc[j]
-            selected_facilities.append({
-                "id": facility_info["Id"],
-                "facilities": facility_info["FacilityPoints"],
-                "XX": facility_info["XX"],
-                "YY": facility_info["YY"]
-            })
+            selected_facilities.append(
+                {
+                    "id": facility_info["Id"],
+                    "facilities": facility_info["FacilityPoints"],
+                    "XX": facility_info["XX"],
+                    "YY": facility_info["YY"],
+                }
+            )
 
     selected_facilities_df = pd.DataFrame(selected_facilities)
     print(selected_facilities_df)
@@ -67,7 +80,6 @@ def main():
             f"Điểm {facility_points.iloc[facility_id]['FacilityPoints']} bao phủ các điểm: {points_covered}"
         )
 
-
     directory = "C:/Users/ASUS/Downloads/rescue_station_project/DB_Results/DB_Result_PCenter_Rescue_Station"
     os.makedirs(directory, exist_ok=True)
 
@@ -78,6 +90,7 @@ def main():
 
     selected_facilities_df.to_csv(file_path, index=False)
     print(f"File đã được lưu tại: {file_path}")
+
 
 if __name__ == "__main__":
     main()

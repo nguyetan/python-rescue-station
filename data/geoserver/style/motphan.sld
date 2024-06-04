@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ogc="http://www.opengis.net/ogc" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd" version="1.1.0" xmlns:se="http://www.opengis.net/se">
+<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:se="http://www.opengis.net/se" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1.0" xmlns:ogc="http://www.opengis.net/ogc">
   <NamedLayer>
-    <se:Name>thuyhe_hcm_motphan_dissolve</se:Name>
+    <se:Name>thuyhe_hcm_motphan_dissolve_84</se:Name>
     <UserStyle>
-      <se:Name>thuyhe_hcm_motphan_dissolve</se:Name>
+      <se:Name>thuyhe_hcm_motphan_dissolve_84</se:Name>
       <se:FeatureTypeStyle>
         <se:Rule>
           <se:Name>1</se:Name>
@@ -18,7 +18,7 @@
           </ogc:Filter>
           <se:PolygonSymbolizer>
             <se:Fill>
-              <se:SvgParameter name="fill">#17aaff</se:SvgParameter>
+              <se:SvgParameter name="fill">#1da1ff</se:SvgParameter>
             </se:Fill>
             <se:Stroke>
               <se:SvgParameter name="stroke">#232323</se:SvgParameter>
@@ -40,7 +40,7 @@
           </ogc:Filter>
           <se:PolygonSymbolizer>
             <se:Fill>
-              <se:SvgParameter name="fill">#1c15d1</se:SvgParameter>
+              <se:SvgParameter name="fill">#222cec</se:SvgParameter>
             </se:Fill>
             <se:Stroke>
               <se:SvgParameter name="stroke">#232323</se:SvgParameter>

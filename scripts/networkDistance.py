@@ -7,7 +7,7 @@ import os
 def main():
 
     sys.stdout.reconfigure(encoding="utf-8")
-    
+
     data = pd.read_csv(
         "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/Thuyhe_HCM_motphan_test_graph.csv"
     )
@@ -77,8 +77,8 @@ def main():
     df["net_length"] = 0.0  # Khởi tạo cột với giá trị 0
     df.loc[0, "net_length"] = net_length_value  # Gán giá trị của tổng vào hàng đầu tiên
 
-   # Đường dẫn đến thư mục
-    folder_path = r'C:/Users/ASUS/Downloads/rescue_station_project/data/csv'
+    # Đường dẫn đến thư mục
+    folder_path = r"C:/Users/ASUS/Downloads/rescue_station_project/data/csv"
 
     # Kiểm tra nếu thư mục không tồn tại, tạo mới
     if not os.path.exists(folder_path):
