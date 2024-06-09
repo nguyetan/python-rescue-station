@@ -6,6 +6,7 @@ import services.firebase
 
 from controllers.auth import auth
 from controllers.feedback import feedback
+from controllers.users import usersController
 
 from dotenv import load_dotenv
 
@@ -42,6 +43,12 @@ def findPCenter():
 def feedbackControl():
     req = request.get_json()
     res = feedback(req)
+    return jsonify(res)
+
+@app.route('/user' , methods=['POST'])
+def userControl():
+    req = request.get_json()
+    res = usersController(req)
     return jsonify(res)
 
 if __name__ == '__main__':
