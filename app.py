@@ -15,7 +15,7 @@ from lib.find_stations import find_stations_LSCP, find_stations_PCenter
 load_dotenv(".env")
 
 app = Flask(__name__)
-CORS(app, origins=['http://127.0.0.1:*', 'https://nguyetan.github.io/*'], supports_credentials=True)
+CORS(app, origins=['http://127.0.0.1:*', 'https://nguyetan.github.io/*', 'http://localhost:*'], supports_credentials=True)
 
 @app.route('/' , methods=['GET'])
 def hello():
