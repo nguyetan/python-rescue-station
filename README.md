@@ -53,10 +53,16 @@ webgis_project/
 
 ## Setup enviroment
 
-- Chạy code để cài những gói pakage cần thiết
+- Cài những gói pakage cần thiết
 
 ```
 pip install -r requirements.txt
+```
+
+- Start server
+
+```
+python app.py
 ```
 
 ## Thao tác chạy các file python theo thứ tự 1 đến 4
