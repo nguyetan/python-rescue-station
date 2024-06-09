@@ -3,7 +3,7 @@ import geopandas
 import pulp
 from spopt.locate import LSCP
 
-from lib.utils import network_distance
+from lib.utils import network_distance, facility_points_calulator
 
 
 def find_stations_LSCP(req):
@@ -11,9 +11,10 @@ def find_stations_LSCP(req):
     lastStation = int(req['lastStation'])
     P_FACILITIES = int(req['numberStation'])
 
-    facility_points = pd.read_csv("data/csv/facility_points.csv")
 
     network = network_distance(firstStation, lastStation)
+
+    facility_points = facility_points_calulator(network)
 
     pivot_table = network.pivot_table(
         values="Distance", index="EndPoint", columns="StartPoint"
@@ -41,9 +42,10 @@ def find_stations_PCenter(req):
     firstStation = int(req['firstStation'])
     lastStation = int(req['lastStation'])
     p_facilities = int(req['numberStation'])
-    facility_points = pd.read_csv("data/csv/facility_points.csv")
 
     network = network_distance(firstStation, lastStation)
+    facility_points = facility_points_calulator(network)
+
 
     pivot_table = network.pivot_table(
         values="Distance", index="EndPoint", columns="StartPoint", fill_value=0

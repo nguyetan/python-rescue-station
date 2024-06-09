@@ -47,9 +47,8 @@ def network_distance(firstStation: int, lastStation: int):
     df.loc[0, "net_length"] = net_length_value
     return df
 
-def facility_points():
-    data1 = pd.read_csv("data/csv/network_distance.csv")
-
+def facility_points_calulator(network_distance: pd.DataFrame):
+    data1 = network_distance
     unique_destinations = set(data1["StartPoint"])
     unique_destinations_df = pd.DataFrame({"StartPoint": list(unique_destinations)})
 
