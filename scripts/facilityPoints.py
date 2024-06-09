@@ -7,14 +7,14 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 def main():
     data1 = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/network_distance.csv"
+        "data/csv/network_distance.csv"
     )
 
     unique_destinations = set(data1["StartPoint"])
     unique_destinations_df = pd.DataFrame({"StartPoint": list(unique_destinations)})
 
     data2 = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/Thuyhe_Diemven2_84.csv"
+        "data/csv/Thuyhe_Diemven2_84.csv"
     )
 
     merged_df = pd.merge(

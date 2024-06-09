@@ -48,4 +48,19 @@ def network_distance(firstStation: int, lastStation: int):
     return df
 
 def facility_points():
-    print("Facility Points")
+    data1 = pd.read_csv("data/csv/network_distance.csv")
+
+    unique_destinations = set(data1["StartPoint"])
+    unique_destinations_df = pd.DataFrame({"StartPoint": list(unique_destinations)})
+
+    data2 = pd.read_csv("data/csv/Thuyhe_Diemven2_84.csv")
+
+    merged_df = pd.merge(
+        unique_destinations_df,
+        data2[["Id", "XX", "YY"]],
+        left_on="StartPoint",
+        right_on="Id",
+    )
+    df_sorted = merged_df[["Id", "StartPoint", "XX", "YY"]]
+    df1 = df_sorted.rename(columns={"StartPoint": "FacilityPoints"})
+    return df1

@@ -14,6 +14,7 @@ def find_stations_LSCP(req):
     facility_points = pd.read_csv("data/csv/facility_points.csv")
 
     network = network_distance(firstStation, lastStation)
+
     pivot_table = network.pivot_table(
         values="Distance", index="EndPoint", columns="StartPoint"
     )
@@ -26,6 +27,8 @@ def find_stations_LSCP(req):
 
     lscp = LSCP.from_cost_matrix(cost_matrix, SERVICE_RADIUS)
     lscp = lscp.solve(pulp.GLPK(msg=False))
+
+    lscp_objval = lscp.problem.objective.value()
 
     selected_facilities = [i for i, dv in enumerate(lscp.fac_vars) if dv.varValue]
     selected_facilities_df = facility_points.iloc[selected_facilities].reset_index(
