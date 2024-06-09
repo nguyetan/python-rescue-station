@@ -5,6 +5,7 @@ import os
 import services.firebase
 
 from controllers.auth import auth
+from controllers.feedback import feedback
 
 from dotenv import load_dotenv
 
@@ -35,6 +36,12 @@ def findLSCP():
 def findPCenter():
     req = request.get_json()
     res = find_stations_PCenter(req['data'])
+    return jsonify(res)
+
+@app.route('/feedback' , methods=['POST'])
+def feedbackControl():
+    req = request.get_json()
+    res = feedback(req)
     return jsonify(res)
 
 if __name__ == '__main__':

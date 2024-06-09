@@ -1,6 +1,4 @@
-from firebase_admin import firestore
-
-db = firestore.client()
+from services.firebase import db
 
 def auth(req):
     userData = req['data']
@@ -8,8 +6,8 @@ def auth(req):
     user = db.collection('users').document(email).get()
     res = {}
     if (user.exists):
-        res = { 'data': user.to_dict()}
+        res = user.to_dict()
     else:
         db.collection('users').document(email).set(userData)
-        res = { 'data': req }
+        res = userData
     return res
