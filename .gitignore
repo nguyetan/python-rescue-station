@@ -1,0 +1,28 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+*.env
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# Dependency directories
+env/
+bin/
+
+# Logs and databases
+*.log
+*.db
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Miscellaneous
+.DS_Store
+
+configs/

@@ -49,9 +49,17 @@ webgis_project/
 └── desc_project (mô tả webgis)
 ```
 
-## Cài đặt
+# Cài đặt
 
-Thao tác chạy các file python theo thứ tự 1 đến 4
+## Setup enviroment
+
+- Chạy code để cài những gói pakage cần thiết
+
+```
+pip install -r requirements.txt
+```
+
+## Thao tác chạy các file python theo thứ tự 1 đến 4
 
 1. Khi run file networkDistance.py -> export network_distance.csv
 
@@ -61,7 +69,7 @@ Thao tác chạy các file python theo thứ tự 1 đến 4
 
 4. Khi run file lSCP.py -> export ketqua_2LSCP_223515_28052024_5349.csv
 
-Các gói Python cần cài đặt trước khi run:
+## Các gói Python cần cài đặt trước khi run:
 
 1. Matplotlib: Tạo biểu đồ và trực quan hóa dữ liệu.
 

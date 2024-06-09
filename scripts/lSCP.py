@@ -10,16 +10,13 @@ from datetime import datetime
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-
 def main():
-    network_distance = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/network_distance.csv"
-    )
+    network_distance = pd.read_csv("data/csv/network_distance.csv")
     facility_points = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/facility_points.csv"
+        "data/csv/facility_points.csv"
     )
     study_area = geopandas.read_file(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5_84.shp"
+        "data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5_84.shp"
     ).dissolve()
 
     pivot_table = network_distance.pivot_table(
@@ -74,7 +71,7 @@ def main():
     random_number = random.randint(1000, 9999)
     file_name = f"ketqua_{lscp_objval}LSCP_{current_time}_{random_number}.csv"
 
-    directory = "C:/Users/ASUS/Downloads/rescue_station_project/DB_Results/DB_Result_LSCP_Rescue_Station"
+    directory = "DB_Results/DB_Result_LSCP_Rescue_Station"
     os.makedirs(directory, exist_ok=True)
     file_path = os.path.join(directory, file_name)
 
