@@ -59,6 +59,10 @@ webgis_project/
 pip install -r requirements.txt
 ```
 
+- Connect firebase
+
+Tạo file servirceAccount.json và để tại `configs/servirceAccount.json`
+
 - Start server
 
 ```
