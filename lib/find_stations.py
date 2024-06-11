@@ -82,8 +82,8 @@ def find_stations_PCenter(req):
             facility_info = facility_points.iloc[j]
             selected_facilities.append(
                 {
-                    "id": facility_info["Id"],
-                    "facilities": facility_info["FacilityPoints"],
+                    "Id": facility_info["Id"],
+                    "FacilityPoints": facility_info["FacilityPoints"],
                     "XX": facility_info["XX"],
                     "YY": facility_info["YY"],
                 }
