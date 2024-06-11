@@ -11,13 +11,13 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 def main():
     network_distance = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/network_distance.csv"
+        "data/csv/network_distance.csv"
     )
     facility_points = pd.read_csv(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/csv/facility_points.csv"
+        "data/csv/facility_points.csv"
     )
     study_area = geopandas.read_file(
-        "C:/Users/ASUS/Downloads/rescue_station_project/data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5_84.shp"
+        "data/shapefile/Thuyhe_HCM_motphan_DISSOLVE_Line5/Thuyhe_HCM_motphan_DISSOLVE_Line5_84.shp"
     ).dissolve()
 
     pivot_table = network_distance.pivot_table(
@@ -80,7 +80,7 @@ def main():
             f"Điểm {facility_points.iloc[facility_id]['FacilityPoints']} bao phủ các điểm: {points_covered}"
         )
 
-    directory = "C:/Users/ASUS/Downloads/rescue_station_project/DB_Results/DB_Result_PCenter_Rescue_Station"
+    directory = "DB_Results/DB_Result_PCenter_Rescue_Station"
     os.makedirs(directory, exist_ok=True)
 
     current_time = datetime.now().strftime("%H%M%S_%d%m%Y")

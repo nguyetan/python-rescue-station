@@ -1,6 +1,8 @@
 import pandas as pd
 import geopandas
 import pulp
+
+import os
 from spopt.locate import LSCP
 
 from lib.utils import network_distance, facility_points_calulator
@@ -80,8 +82,8 @@ def find_stations_PCenter(req):
             facility_info = facility_points.iloc[j]
             selected_facilities.append(
                 {
-                    "Id": facility_info["Id"],
-                    "FacilityPoints": facility_info["FacilityPoints"],
+                    "id": facility_info["Id"],
+                    "facilities": facility_info["FacilityPoints"],
                     "XX": facility_info["XX"],
                     "YY": facility_info["YY"],
                 }

@@ -26,7 +26,7 @@ def main():
     df_sorted = merged_df[["Id", "StartPoint", "XX", "YY"]]
     df = df_sorted.rename(columns={"StartPoint": "FacilityPoints"})
 
-    folder_path = r"C:/Users/ASUS/Downloads/rescue_station_project/data/csv"
+    folder_path = r"data/csv"
 
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)

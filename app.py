@@ -23,9 +23,12 @@ def hello():
 
 @app.route('/auth' , methods=['POST'])
 def authRequest():
-    req = request.get_json()
-    res = auth(req)
-    return jsonify(res)
+    try:
+        req = request.get_json()
+        res = auth(req)
+        return jsonify(res)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 @app.route('/findLSCP' , methods=['POST'])
 def findLSCP():
