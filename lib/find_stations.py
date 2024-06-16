@@ -1,18 +1,14 @@
 import pandas as pd
 import geopandas
 import pulp
-
 import os
 from spopt.locate import LSCP
-
 from lib.utils import network_distance, facility_points_calulator
-
 
 def find_stations_LSCP(req):
     firstStation = int(req['firstStation'])
     lastStation = int(req['lastStation'])
     P_FACILITIES = int(req['numberStation'])
-
 
     network = network_distance(firstStation, lastStation)
 
