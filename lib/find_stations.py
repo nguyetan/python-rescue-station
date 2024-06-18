@@ -5,10 +5,11 @@ import os
 from spopt.locate import LSCP
 from lib.utils import network_distance, facility_points_calulator
 
+
 def find_stations_LSCP(req):
-    firstStation = int(req['firstStation'])
-    lastStation = int(req['lastStation'])
-    P_FACILITIES = int(req['numberStation'])
+    firstStation = int(req["firstStation"])
+    lastStation = int(req["lastStation"])
+    P_FACILITIES = int(req["numberStation"])
 
     network = network_distance(firstStation, lastStation)
 
@@ -18,7 +19,6 @@ def find_stations_LSCP(req):
         values="Distance", index="EndPoint", columns="StartPoint"
     )
     cost_matrix = pivot_table.fillna(0).astype(int)
-
 
     total_net_length = network["net_length"].sum()
     SERVICE_RADIUS = total_net_length / (P_FACILITIES * 2)
@@ -34,16 +34,16 @@ def find_stations_LSCP(req):
         drop=True
     )
 
-    return selected_facilities_df.to_dict(orient='records')
+    return selected_facilities_df.to_dict(orient="records")
+
 
 def find_stations_PCenter(req):
-    firstStation = int(req['firstStation'])
-    lastStation = int(req['lastStation'])
-    p_facilities = int(req['numberStation'])
+    firstStation = int(req["firstStation"])
+    lastStation = int(req["lastStation"])
+    p_facilities = int(req["numberStation"])
 
     network = network_distance(firstStation, lastStation)
     facility_points = facility_points_calulator(network)
-
 
     pivot_table = network.pivot_table(
         values="Distance", index="EndPoint", columns="StartPoint", fill_value=0
@@ -86,4 +86,4 @@ def find_stations_PCenter(req):
             )
 
     selected_facilities_df = pd.DataFrame(selected_facilities)
-    return selected_facilities_df.to_dict(orient='records')
+    return selected_facilities_df.to_dict(orient="records")
