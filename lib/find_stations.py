@@ -1,7 +1,5 @@
 import pandas as pd
-import geopandas
 import pulp
-import os
 import spopt
 from spopt.locate import LSCP, PCenter
 from lib.utils import network_distance, facility_points_calulator
@@ -46,10 +44,10 @@ def find_stations_PCenter(req):
     network = network_distance(firstStation, lastStation)
     facility_points = facility_points_calulator(network)
 
-    pivot_table = network.pivot_table(
-        values="Distance", index="EndPoint", columns="StartPoint"
-    )
-    cost_matrix = pivot_table.fillna(0).astype(int)
+    # pivot_table = network.pivot_table(
+    #     values="Distance", index="EndPoint", columns="StartPoint"
+    # )
+    # cost_matrix = pivot_table.fillna(0).astype(int)
 
     # num_points = cost_matrix.shape[0]
     # model = pulp.LpProblem("p-Center Problem", pulp.LpMinimize)
@@ -88,13 +86,13 @@ def find_stations_PCenter(req):
 
     # selected_facilities_df = pd.DataFrame(selected_facilities)
 
-    # # Tạo bảng pivot từ dataframe
-    # pivot_table = network.pivot_table(
-    #     values="Distance", index="EndPoint", columns="StartPoint", fill_value=0
-    # )
+    # Tạo bảng pivot từ dataframe
+    pivot_table = network.pivot_table(
+        values="Distance", index="EndPoint", columns="StartPoint", fill_value=0
+    )
 
-    # # Chuyển đổi thành ma trận numpy để sử dụng với spopt và pulp
-    # cost_matrix = pivot_table.values.astype(int)
+    # Chuyển đổi thành ma trận numpy để sử dụng với spopt và pulp
+    cost_matrix = pivot_table.values.astype(int)
 
     # Khởi tạo và giải quyết bài toán LSCP
     pcenter = PCenter.from_cost_matrix(cost_matrix, p_facilities)
