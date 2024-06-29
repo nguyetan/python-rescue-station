@@ -24,7 +24,7 @@ def find_stations_LSCP(req):
     SERVICE_RADIUS = round(SERVICE_RADIUS, 2)
 
     lscp = LSCP.from_cost_matrix(cost_matrix, SERVICE_RADIUS)
-    lscp = lscp.solve(pulp.CPLEX_CMD(msg=False))
+    lscp = lscp.solve(pulp.PULP_CBC_CMD(msg=False))
 
     lscp_objval = lscp.problem.objective.value()
 
@@ -96,7 +96,7 @@ def find_stations_PCenter(req):
 
     # Khởi tạo và giải quyết bài toán LSCP
     pcenter = PCenter.from_cost_matrix(cost_matrix, p_facilities)
-    pcenter = pcenter.solve(pulp.CPLEX_CMD(msg=False))
+    pcenter = pcenter.solve(pulp.PULP_CBC_CMD(msg=False))
 
     # Lấy giá trị objective
     pcenter_objval = pcenter.problem.objective.value()
