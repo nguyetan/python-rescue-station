@@ -33,7 +33,12 @@ def find_stations_LSCP(req):
         drop=True
     )
 
-    return selected_facilities_df.to_dict(orient="records")
+    unselected_facilities = facility_points[~facility_points.index.isin(selected_facilities)].reset_index(drop=True)
+    response = {
+        "selected": selected_facilities_df.to_dict(orient="records"),
+        "unselected": unselected_facilities.to_dict(orient="records"),
+    }
+    return response
 
 
 def find_stations_PCenter(req):
@@ -108,4 +113,9 @@ def find_stations_PCenter(req):
     selected_facilities_df = facility_points.iloc[selected_facilities].reset_index(
         drop=True
     )
-    return selected_facilities_df.to_dict(orient="records")
+    unselected_facilities = facility_points[~facility_points.index.isin(selected_facilities)].reset_index(drop=True)
+    response = {
+        "selected": selected_facilities_df.to_dict(orient="records"),
+        "unselected": unselected_facilities.to_dict(orient="records"),
+    }
+    return response
