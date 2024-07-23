@@ -8,7 +8,7 @@ from lib.utils import network_distance, facility_points_calulator
 def find_stations_LSCP(req):
     firstStation = int(req["firstStation"])
     lastStation = int(req["lastStation"])
-    P_FACILITIES = int(req["numberStation"])
+    SERVICE_RADIUS = int(req["numberStation"])
 
     network = network_distance(firstStation, lastStation)
 
@@ -19,9 +19,9 @@ def find_stations_LSCP(req):
     )
     cost_matrix = pivot_table.fillna(0).astype(int)
 
-    total_net_length = network["net_length"].sum()
-    SERVICE_RADIUS = total_net_length / (P_FACILITIES * 2)
-    SERVICE_RADIUS = round(SERVICE_RADIUS, 2)
+    # total_net_length = network["net_length"].sum()
+    # SERVICE_RADIUS = total_net_length / (P_FACILITIES * 2)
+    # SERVICE_RADIUS = round(SERVICE_RADIUS, 2)
 
     lscp = LSCP.from_cost_matrix(cost_matrix, SERVICE_RADIUS)
     lscp = lscp.solve(pulp.PULP_CBC_CMD(msg=False))
@@ -33,7 +33,9 @@ def find_stations_LSCP(req):
         drop=True
     )
 
-    unselected_facilities = facility_points[~facility_points.index.isin(selected_facilities)].reset_index(drop=True)
+    unselected_facilities = facility_points[
+        ~facility_points.index.isin(selected_facilities)
+    ].reset_index(drop=True)
     response = {
         "selected": selected_facilities_df.to_dict(orient="records"),
         "unselected": unselected_facilities.to_dict(orient="records"),
@@ -113,7 +115,9 @@ def find_stations_PCenter(req):
     selected_facilities_df = facility_points.iloc[selected_facilities].reset_index(
         drop=True
     )
-    unselected_facilities = facility_points[~facility_points.index.isin(selected_facilities)].reset_index(drop=True)
+    unselected_facilities = facility_points[
+        ~facility_points.index.isin(selected_facilities)
+    ].reset_index(drop=True)
     response = {
         "selected": selected_facilities_df.to_dict(orient="records"),
         "unselected": unselected_facilities.to_dict(orient="records"),
